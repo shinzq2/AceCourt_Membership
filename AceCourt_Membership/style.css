@@ -1,0 +1,155 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F3F3E0;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #183B4E;
+}
+
+.navbar-brand {
+  color: #183B4E;
+  font-weight: bold;
+}
+
+.logo {
+  width: 70px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-link {
+  color: #ffffff !important;
+}
+
+.user-icon{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  }
+
+.user-img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+
+.hero-image {
+  background-image: url("image/ac_page1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 700px;
+  position: relative;
+}
+
+.hero-img {
+  height: 500px;
+  object-fit: cover;
+  filter: brightness(75%);
+}
+
+.carousel-caption h2{
+  color: #ffffff;
+  text-shadow: 2px 2px 4px #183B4E;
+  font-size: 2rem;
+}
+
+.carousel-caption p {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px #183B4E;
+  font-size: 1rem;
+}
+
+@media (max-width: 576px) {
+  .carousel-caption h2 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #DDA853;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.court-section {
+  background-color: #F3F3E0;
+  padding: 50px 0;
+}
+
+.court-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.court-img:hover {
+  transform: scale(1.03);
+}
+
+.court-caption {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #183B4E;
+}
+
+.section {
+  padding: 50px 20px;
+}
+
+.section h2 {
+  color: #183B4E;
+  margin-bottom: 20px;
+}
+
+.court-img, .staff-img{
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #DDA853;
+  margin-bottom: 10px;
+}
+
+.brand-text {
+  font-weight: bold;
+  color: #F3F3E0;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.custom-navbar {
+  background-color: #183B4E;
+  padding: 10px 20px;
+}
+
+.staff-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.staff-name {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #183B4E;
+}
+
+.footer {
+  background-color: #183B4E;
+  color: #fff;
+  padding: 30px 20px;
+}
