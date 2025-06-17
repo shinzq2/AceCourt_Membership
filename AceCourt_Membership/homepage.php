@@ -166,11 +166,11 @@ include 'navbar.php';
     <div class="row justify-content-center">
       <?php
       $staff = [
-        ['img' => 'user.jpg', 'name' => 'Adriana Aqilah'],
-        ['img' => 'user.jpg', 'name' => 'Kaazhim Nur Karim'],
+        ['img' => 'Staff1.jpg', 'name' => 'Adriana Aqilah'],
+        ['img' => 'Staff2.jpg', 'name' => 'Kaazhim Nur Karim'],
         ['img' => 'user.jpg', 'name' => 'Nur Aqila'],
         ['img' => 'user.jpg', 'name' => 'Nurul Zawanah'],
-        ['img' => 'staff5.jpg', 'name' => 'Siti Nur Zuhairah']
+        ['img' => 'Staff5.jpg', 'name' => 'Siti Nur Zuhairah']
       ];
       foreach ($staff as $person): ?>
         <div class="col-md-2 text-center">
