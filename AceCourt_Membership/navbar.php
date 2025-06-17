@@ -54,6 +54,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php endif; ?>
   </a>
   <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="userProfile.php">User Profile</a></li>
     <?php if (isset($_SESSION['user'])): ?>
       <li><a class="dropdown-item" href="logout.php">Logout</a></li>
     <?php else: ?>
