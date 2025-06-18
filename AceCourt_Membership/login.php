@@ -1,52 +1,48 @@
 <?php
+session_start();
 require 'db.php';
-
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 $message = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
+// 5 hardcoded admin accounts
+$admin = [
+    'adriana1@acestaff.com' => '123456',
+    'kaazhim2@acestaff.com' => '123456',
+    'aqila3@acestaff.com' => '123456',
+    'zawanah4@acestaff.com' => '123456',
+    'zuhairah5@acestaff.com' => '123456'
+];
 
-    // ✅ Step 1: Check if admin
-    $stmt = $conn->prepare("SELECT * FROM ADMIN WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $adminResult = $stmt->get_result();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
 
-    if ($admin = $adminResult->fetch_assoc()) {
-        // ✅ Admin login (uses phoneNum for demo password)
-        if (password_verify($password, $admin['phoneNum'])) {
-            $_SESSION['role'] = 'admin';
-            $_SESSION['admin_id'] = $admin['adminId'];
-            $_SESSION['email'] = $admin['email'];
-            $_SESSION['user'] = $admin['fullName']; // ✅ Store admin name for navbar
-            header("Location: dashboard_admin.php");
+    // First, check admin login
+    if (isset($admin[$email])) {
+        if ($admin[$email] === $password) {
+            $_SESSION["role"] = "admin";
+            $_SESSION["email"] = $email;
+            header("Location: admin_dashboard.php");
             exit();
         } else {
             $message = "Invalid password for admin.";
         }
     } else {
-        // ✅ Step 2: Check if member
+        // Check member login from database
         $stmt = $conn->prepare("SELECT * FROM MEMBER WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
-        $memberResult = $stmt->get_result();
+        $result = $stmt->get_result();
 
-        if ($member = $memberResult->fetch_assoc()) {
-            if (password_verify($password, $member['password'])) {
-                $_SESSION['role'] = 'member';
-                $_SESSION['member_id'] = $member['memberId'];
-                $_SESSION['email'] = $member['email'];
-                $_SESSION['user'] = $member['fullName']; // ✅ Store member name for navbar
+        if ($user = $result->fetch_assoc()) {
+            if (password_verify($password, $user["password"])) {
+                $_SESSION["role"] = "member";
+                $_SESSION["email"] = $user["email"];
+                $_SESSION["memberId"] = $user["memberId"];
                 header("Location: homepage.php");
                 exit();
             } else {
-                $message = "Incorrect password.";
+                $message = "Invalid password for member.";
             }
         } else {
             $message = "Email not found.";
@@ -55,37 +51,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login - Ace Court</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Login - Ace Court</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+        background-color: #d9e4ff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+    .login-container h2 {
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: #333;
+    }
+    .login-container label {
+        display: block;
+        margin-bottom: 8px;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+    }
+    .login-container input[type="email"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+    .login-container button {
+        background-color: #27548A;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+    .login-container button:hover {
+        background-color: #183B4E;
+    }
+    .login-container a {
+        display: block;
+        margin-top: 12px;
+        color: #27548A;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .error-message {
+        color: red;
+        margin-bottom: 10px;
+    }
+  </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="card p-4 mx-auto" style="max-width: 400px;">
-        <h3 class="text-center">LOGIN FORM</h3>
-        <form method="POST">
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" required class="form-control" placeholder="Enter your email address">
-            </div>
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" required class="form-control" placeholder="Enter your password">
-            </div>
-            <div class="mb-2">
-                <a href="forgot_password.php">Forgot Password?</a>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <div class="mt-3 text-center">
-            Don't have an account? <a href="signup.php">Sign up here</a>
-        </div>
-        <?php if ($message): ?>
-            <div class="alert alert-warning mt-3"><?= $message ?></div>
-        <?php endif; ?>
-    </div>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
+
+    <?php if (!empty($message)): ?>
+        <p class="error-message"><?= $message ?></p>
+    <?php endif; ?>
+
+    <form method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <a href="forgot_password.php">Forgot Password?</a>
+    <a href="register.php">Don't have an account? Register</a>
 </div>
 </body>
 </html>
