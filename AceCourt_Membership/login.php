@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["role"] = "member";
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["memberId"] = $user["memberId"];
+                $_SESSION["fullName"] = $user["fullName"];
                 header("Location: homepage.php");
                 exit();
             } else {
@@ -143,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <a href="forgot_password.php">Forgot Password?</a>
-    <a href="register.php">Don't have an account? Register</a>
+    <a href="signup.php">Don't have an account? Register</a>
 </div>
 </body>
 </html>
