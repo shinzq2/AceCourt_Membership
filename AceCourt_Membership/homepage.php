@@ -168,7 +168,7 @@ include 'navbar.php';
       $staff = [
         ['img' => 'Staff1.jpg', 'name' => 'Adriana Aqilah'],
         ['img' => 'Staff2.jpg', 'name' => 'Kaazhim Nur Karim'],
-        ['img' => 'user.jpg', 'name' => 'Nur Aqila'],
+        ['img' => 'Staff3.jpg', 'name' => 'Nur Aqila'],
         ['img' => 'user.jpg', 'name' => 'Nurul Zawanah'],
         ['img' => 'Staff5.jpg', 'name' => 'Siti Nur Zuhairah']
       ];
