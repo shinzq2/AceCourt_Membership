@@ -49,13 +49,13 @@ if (session_status() === PHP_SESSION_NONE) {
 <div class="dropdown">
   <a class="dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
     <img src="image/user_icon.png" class="user-img" alt="User Icon">
-    <?php if (isset($_SESSION['user'])): ?>
-      <span class="ms-2"><?= htmlspecialchars($_SESSION['user']) ?></span>
-    <?php endif; ?>
+    <?php if (isset($_SESSION['fullName'])): ?>
+  <span class="ms-2"><?= htmlspecialchars($_SESSION['fullName']) ?></span>
+  <?php endif; ?>
   </a>
   <ul class="dropdown-menu dropdown-menu-end">
     <li><a class="dropdown-item" href="userProfile.php">User Profile</a></li>
-    <?php if (isset($_SESSION['user'])): ?>
+    <?php if (isset($_SESSION['email'])): ?>
       <li><a class="dropdown-item" href="logout.php">Logout</a></li>
     <?php else: ?>
       <li><a class="dropdown-item" href="login.php">Login</a></li>
