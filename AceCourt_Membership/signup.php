@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 <div class="container mt-5">
-    <h2>Sign Up Form</h2>
+    <h2>Register</h2>
     <form method="POST">
         <div class="mb-3">
             <label>Full Name</label>
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Phone Number</label>
             <input type="text" name="phoneNum" class="form-control" required>
         </div>
-        <button class="btn btn-primary" type="submit">Sign Up</button>
+        <button class="btn btn-primary" type="submit">Register</button>
 
         <?php if ($message): ?>
             <div class="alert alert-info mt-3"><?= $message ?></div>
